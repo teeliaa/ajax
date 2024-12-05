@@ -26,7 +26,7 @@ $(document).ready(function() {
       url: src,
       dataType: 'html',
       success: function(data) {
-        rightSection.html(data);
+        rightSection.html(`<div class="scoped-style">${data}</div>`);
       },
       error: function() {
         rightSection.html('<p>컨텐츠를 로드하는 중 오류가 발생했습니다.</p>');
@@ -53,7 +53,7 @@ $(document).ready(function() {
       url: src,
       dataType: 'html',
       success: function(data) {
-        contentSection.html(data).show();
+        contentSection.html(`<div class="scoped-style">${data}</div>`).show();
       },
       error: function() {
         contentSection.html('<p>컨텐츠를 로드하는 중 오류가 발생했습니다.</p>');
