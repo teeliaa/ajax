@@ -77,7 +77,7 @@ $(document).ready(function() {
           }
         });
 
-        content.fine('script').each(function(){
+        content.find('script').each(function(){
           const script = document.createElement('script');
           script.text = $(this).text();
           document.head.appendChild(script).parentNode.removeChild(script);
