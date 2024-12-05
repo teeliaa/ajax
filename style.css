@@ -1,0 +1,220 @@
+html, body{
+  /*overflow: auto;*/
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+header{
+  position: relative;
+  padding: 10px;
+  height: 200px; /* header 높이 설정 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+header::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('media/header_img.jpg'); /* 배경 이미지 경로 설정 */
+  background-size: cover; /* 이미지가 전체 영역을 덮도록 설정 */
+  background-position: center; /* 이미지가 중앙에 오도록 설정 */
+  opacity: 0.6; /* 이미지의 불투명도 설정 */
+  z-index: -1; /* 텍스트 뒤에 배치 */
+}
+
+.itim-regular {
+  font-family: "Itim", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 70pt;
+  color: #564239;
+}
+
+
+nav{
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+nav ul {
+  font-size: 17px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline-block;
+  text-align: center;
+  color: #fff;
+  background-color: #d0b8ac;
+  width: 130px;
+  height: 30px;
+  padding: 5px;
+  margin-left: 40px;
+  margin-right: 40px;
+  line-height: 30px;
+  border-radius: 40px;
+  transition: transform 0.3s ease;
+}
+
+nav ul li:hover {
+  transform: scale(1.2);
+}
+
+.container{
+  min-height: calc(100vh - 200px - 40px);
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  display: flex;
+  height: 630px;
+  margin-bottom: 40px;
+  width: 100%;  /*2줄 추가*/
+  box-sizing: border-box;
+}
+
+.left {
+  width: 430px;
+  height: 100%;
+  border-radius: 20px;
+  border: 10px dashed #f3d8c7;
+  margin-left: 80px;
+  oveflow: auto;
+  flex-shrink: 0;
+}
+
+.right {
+  width: 1050px;
+  padding: 10px;
+  margin-left: 10px;
+  margin-right: 80px;
+  border: 5px solid #f3d8c7;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  flex-shrink: 0; /**/
+}
+
+section {
+  display: flex; /* flexbox 사용 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  /*min-height: auto;*/
+  height: 100vh; /* section의 높이를 화면 전체로 설정 */
+  width: 100%; /* section의 너비를 화면 전체로 설정 */
+  position: relative; /* 상대 위치 설정 */
+  margin-bottom: 20px;
+  /*overflow: hidden;*/
+}
+
+section article h3{
+  text-align: center;
+  color: #fff;
+  background-color: #d5b8ac;
+  width: auto;
+  height: 30px;
+  padding: 5px;
+  margin-left: 40px;
+  margin-right: 40px;
+  line-height: 30px;
+  border-radius: 40px;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 10px 8px;
+  margin-left: 50px;
+  margin-top: 5px;
+  display: block;
+}
+
+table a:hover{
+  text-shadow: 0 0 4px gray;
+  font-weight: bold;
+}
+
+td {
+  padding: 1px;
+  text-align: center;
+}
+
+a{
+  text-decoration-line: none;
+  color: #564239;
+}
+
+
+.slides{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s ease;
+}
+
+.slide{
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.iframe-container{
+  display: none;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+
+iframe {
+    width: 100%;
+    height: 100%;
+    /*position: relative;*/
+    z-index: 1; /* iframe이 슬라이드 위에 표시되도록 */
+    border: none;
+    display: none;
+}
+
+footer{
+  background-color: #efe5dc;
+  margin-top: 40px;
+  bottom: 0;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  padding: 10px;
+}
+
+#full-section-frame {
+    width: 70%;
+    height: 100%;
+    border: none;
+    display: block;
+    position: relative;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    margin-top: 0 auto;
+}

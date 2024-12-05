@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>단수 기록기</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style_sub.css">
+    <style media="screen">
+      button{
+        margin: 0 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3 style="text-align: center">단수 기록기</h3>
+    <p style="text-align: center">
+      <button type="button" name="button" onclick="addRow()">단 추가하기</button>
+      <button type="button" name="button" onclick="removeRow()">단 삭제하기</button>
+      <button type="button" name="button" onclick="resetAllColors()">기록 초기화하기</button>
+    </p><br><br>
+
+    <section>
+      <article id="rowContainer" style="text-align: center;">
+      </article>
+    </section>
+
+    <script type="text/javascript">
+      let rowCount = 0; // 현재 단수의 개수
+
+      function addRow() {
+        rowCount++;
+
+        // 새로운 원(div)을 생성
+        const newRow = document.createElement("div");
+        newRow.className = "circle";
+        newRow.textContent = rowCount; // 원 내부에 번호 표시
+
+        // 원 클릭 시 색칠/색 제거 기능 추가
+        newRow.addEventListener("click", function() {
+          if (newRow.classList.contains("highlighted")) {
+            newRow.classList.remove("highlighted"); // 색 제거
+          } else {
+            newRow.classList.add("highlighted"); // 색칠
+          }
+        });
+
+        // rowContainer에 새로운 원 추가
+        const rowContainer = document.getElementById("rowContainer");
+        rowContainer.appendChild(newRow);
+      }
+
+      function removeRow() {
+        if (rowCount > 0) {
+          const rowContainer = document.getElementById("rowContainer");
+          rowContainer.removeChild(rowContainer.lastElementChild); // 마지막 원 삭제
+          rowCount--;
+        }
+      }
+
+      // 모든 원의 색을 초기화하는 함수
+      function resetAllColors() {
+        const rows = document.querySelectorAll("#rowContainer .circle");
+        rows.forEach(function(row) {
+          row.classList.remove("highlighted"); // 모든 원의 색 제거
+        });
+      }
+    </script>
+  </body>
+</html>

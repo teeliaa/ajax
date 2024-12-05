@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>EveryKnit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="slide2.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1 class="itim-regular" style="text-align: center">EveryKnit</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="main.html" style="color: #fff">Home</a></li>
+        <li><a href='#' onclick="loadFullSection('knitting/gage_cal.html'); return false;" style="color: #fff">게이지 계산기</a></li>
+        <li><a href='#' onclick="loadFullSection('knitting/row_count.html'); return false;" style="color: #fff">단수 기록기</a></li>
+      </ul>
+    </nav><br><br>
+    <section class="container">
+      <article class="left">
+        <h3>대바늘 기초 뜨개</h3>
+        <table>
+          <tr>
+            <td width="280px"><a href="#" onclick="loadContent('knitting/caston.html'); return false;">
+              코 잡기</a></td>
+          </tr>
+          <tr>
+            <td width="280px"><a href="#" onclick="loadContent('knitting/knit-purl.html'); return false;">
+              겉뜨기·안뜨기</a></td>
+          </tr>
+          <tr>
+            <td width="280px"><a href="#" onclick="loadContent('knitting/gart.html'); return false;">
+              가터뜨기</a></td>
+          </tr>
+          <tr>
+            <td width="280px"><a href="#" onclick="loadContent('knitting/stock.html'); return false;">
+              메리야스뜨기</a></td>
+          </tr>
+          <tr>
+            <td width="280px"><a href="#" onclick="loadContent('knitting/ribbing.html'); return false;">
+              고무뜨기</a></td>
+          </tr>
+          <tr>
+            <td width="280px"><a href="#" onclick="loadContent('knitting/bind_off.html'); return false;">
+              코막음(편물 마무리)</a></td>
+          </tr>
+          <tr>
+            <td width="280px"><a href="#" onclick="loadContent('knitting/gage.html'); return false;">
+              게이지 이해하기</a></td>
+          </tr>
+        </table>
+        <h3>대바늘 고급 뜨개</h3>
+        <table>
+          <tr>
+            <td width="280px"><a href="#" onclick="loadContent('knitting/shortrow.html'); return false;">
+              경사뜨기</a></td>
+          </tr>
+          <tr>
+            <td width="280px"><a href="#" onclick="loadContent('knitting/make.html'); return false;">
+              코 늘리기</a></td>
+          </tr>
+          <tr>
+            <td width="280px"><a href="#" onclick="loadContent('knitting/shrink.html'); return false;">
+             코 줄이기</a></td>
+          </tr>
+          <tr>
+            <td width="280px"><a href="#" onclick="loadContent('knitting/cross.html'); return false;">
+             교차뜨기(꽈배기 뜨기)</a></td>
+          <tr>
+            <td width="280px"><a href="#" onclick="loadContent('knitting/through.html'); return false;">
+              꼬아뜨기</a></td>
+          </tr>
+          <tr>
+            <td width="280px"><a href="#" onclick="loadContent('knitting/yarn_over.html'); return false;">
+              바늘 비우기</a></td>
+          </tr>
+          <tr>
+            <td width="280px"><a href="#" onclick="loadContent('knitting/pickup.html'); return false;">
+              코 줍기</a></td>
+          </tr>
+        </table>
+      </article>
+      <article class="right" id="content">
+        <div class="slides">
+          <div class="slide" style="background-image: url('media/main_back.jpg');"></div>
+          <div class="slide" style="background-image: url('media/main_back2.jpg');"></div>
+          <div class="slide" style="background-image: url('media/main_back3.jpg');"></div>
+          <div class="slide" style="background-image: url('media/main_back4.jpg');"></div>
+        </div>
+        <iframe name="right-frame" id="right-frame" frameborder="0" style="display: none;"></iframe>
+      </article>
+    </section>
+    <footer><br><br></footer>
+  </body>
+</html>

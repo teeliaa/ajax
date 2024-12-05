@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>게이지 계산기</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style_sub.css">
+    <script type="text/javascript">
+      function calculateGauge(){
+        const myGage = parseFloat(document.querySelector('input[name="mygage"]').value);
+        const myDan = parseFloat(document.querySelector('input[name="mydan"]').value);
+        const patGage = parseFloat(document.querySelector('input[name="patgage"]').value);
+        const patGageDan = parseFloat(document.querySelector('input[name="patgagedan"]').value);
+        const patternNum = parseFloat(document.querySelector('input[name="patternnum"]').value);
+        const patternDan = parseFloat(document.querySelector('input[name="patterdan"]').value);
+
+        let result = '';
+
+        if(isNaN(myGage) || isNaN(myDan) || isNaN(patGage) || isNaN(patGageDan) || isNaN(patternNum) || isNaN(patternDan)){
+          result = '모든 입력값을 올바르게 입력해주세요.';
+        } else{
+          const myNum = (myGage / patGage)*patternNum;
+          const myDanResult = (myDan / patGageDan)*patternDan;
+
+          result = `
+          <p>계산 결과:<br>
+          내가 떠야 할 코수: ${myNum.toFixed(2)}코<br>
+          내가 떠야 할 단수: ${myDanResult.toFixed(2)}단
+          </p>`;
+        }
+
+        document.getElementById('result').innerHTML = result;
+      }
+    </script>
+  </head>
+  <body>
+    <h3 style="text-align: center">게이지 계산기</h3>
+    <p style="text-align: center">내 게이지를 입력하고, 도안 게이지와 도안에서 떠야할 코수/단수를 입력하면 내가 떠야할 코수/단수가 나옵니다</p><br><br>
+
+    <section>
+    <article class="left">
+      <p>내 게이지 코수: <input type="text" name="mygage" placeholder="내 게이지 코수 입력"><br>
+        내 게이지 단수: <input type="text" name="mydan" placeholder="내 게이지 코수 단수"><br>
+        도안 게이지 코수: <input type="text" name="patgage" placeholder="도안 게이지 코수 입력"><br>
+        도안 게이지 단수: <input type="text" name="patgagedan" placeholder="도안 게이지 코수 단수"><br>
+        도안 코수: <input type="text" name="patternnum" placeholder="도안 코수 입력"><br>
+        도안 단수: <input type="text" name="patterdan" placeholder="도안 코수 단수"><br>
+      </p><br><br>
+      <button type="button" name="button" onclick="calculateGauge()">계산하기</button>
+    </article>
+    <article class="right">
+      <p id="result"></p>
+    </article>
+  </section>
+  </body>
+</html>
