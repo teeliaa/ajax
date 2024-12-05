@@ -33,6 +33,15 @@ $(document).ready(function() {
       }
     });
 
+    // Ajax로 HTML을 로드한 후에
+    rightSection.find('iframe').each(function() {
+    const iframeSrc = $(this).attr('data-src');
+    if (iframeSrc) {
+      $(this).attr('src', iframeSrc);
+    }
+});
+
+
     leftSection.show();
     rightSection.show();
   };
@@ -59,6 +68,15 @@ $(document).ready(function() {
         contentSection.html('<p>컨텐츠를 로드하는 중 오류가 발생했습니다.</p>');
       }
     });
+
+    // Ajax로 HTML을 로드한 후에
+rightSection.find('iframe').each(function() {
+  const iframeSrc = $(this).attr('data-src');
+  if (iframeSrc) {
+    $(this).attr('src', iframeSrc);
+  }
+});
+
 
     $('html, body').css('overflow', 'hidden');
   };
