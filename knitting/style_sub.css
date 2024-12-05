@@ -76,13 +76,6 @@
   width: 100%;
 }
 
-/*article{
-  display: flex; /* flexbox 사용 */
-  /*justify-content: space-between; /* 수평 중앙 정렬 */
-  /*width: 100%; /* section의 너비를 화면 전체로 설정 */
-  /*position: relative; /* 상대 위치 설정 */
-/*}*/
-
 .scoped-style .left, .right{
   width: 48%;
   margin: 0;
