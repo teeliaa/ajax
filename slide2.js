@@ -37,9 +37,18 @@ $(document).ready(function() {
           }
         });
 
-        content.find('iframe').on('load', function(){
-          console.log('iframe loaded successfully');
+        // 로드된 스크립트 수동 실행
+        content.find('script').each(function() {
+          const script = document.createElement('script');
+          script.text = $(this).text();
+          document.head.appendChild(script).parentNode.removeChild(script);
         });
+
+        // 서브 콘텐츠에 style_sub.css를 추가
+        $('<link>')
+          .appendTo(content)
+          .attr({ type: 'text/css', rel: 'stylesheet' })
+          .attr('href', '/ajax/knitting/style_sub.css');
       },
       error: function() {
         rightSection.html('<p>컨텐츠를 로드하는 중 오류가 발생했습니다.</p>');
@@ -77,11 +86,18 @@ $(document).ready(function() {
           }
         });
 
-        content.find('script').each(function(){
+        // 로드된 스크립트 수동 실행
+        content.find('script').each(function() {
           const script = document.createElement('script');
           script.text = $(this).text();
           document.head.appendChild(script).parentNode.removeChild(script);
         });
+
+        // 서브 콘텐츠에 style_sub.css를 추가
+        $('<link>')
+          .appendTo(content)
+          .attr({ type: 'text/css', rel: 'stylesheet' })
+          .attr('href', '/ajax/knitting/style_sub.css');
       },
       error: function() {
         contentSection.html('<p>컨텐츠를 로드하는 중 오류가 발생했습니다.</p>');
@@ -103,3 +119,4 @@ $(document).ready(function() {
     $('html, body').css('overflow', 'auto');
   };
 });
+
