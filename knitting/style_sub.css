@@ -1,4 +1,4 @@
-body{
+.scoped-style body{
   font-family: "Noto Sans KR", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
@@ -12,37 +12,37 @@ body{
   line-height: 1.2;
 }
 
-h3{
+.scoped-style h3{
   color: #564239;
 }
 
-img{
+.scoped-style img{
   vertical-align: middle;
 }
 
-iframe{
+.scoped-style iframe{
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-p{
+.scoped-style p{
   margin-top: 0;
   margin-bottom: 0;
 }
 
-ul {
+.scoped-style ul {
   list-style-type: none; /* 기본 글머리 기호 제거 */
   padding-left: 0; /* 기본 패딩 제거 */
   font-size: 16px;
 }
 
-ul li::before {
+.scoped-style ul li::before {
   content: "- "; /* 각 항목 앞에 - 기호 추가 */
   color: inherit; /* 글자색 상속 */
   margin-right: 5px; /* 글머리 기호와 텍스트 사이 간격 */
 }
 
-input[type="text"] {
+.scoped-style input[type="text"] {
   height: 20px; /* input 높이를 40px로 설정 */
   font-size: 20px; /* 텍스트 크기 조정 */
   padding: 5px;
@@ -50,7 +50,7 @@ input[type="text"] {
   width: 80%;/**/
 }
 
-button{
+.scoped-style button{
   font-size: 17px;
   font-weight: 500;
   text-align: center;
@@ -66,11 +66,11 @@ button{
   transition: transform 0.3s ease;
 }
 
-button:hover{
+.scoped-style button:hover{
   transform: scale(1.1);
 }
 
-section{
+.scoped-style section{
   display: flex;
   justify-content: space-between;;
   width: 100%;
@@ -83,7 +83,7 @@ section{
   /*position: relative; /* 상대 위치 설정 */
 /*}*/
 
-.left, .right{
+.scoped-style .left, .right{
   width: 48%;
   margin: 0;
   padding: 10px;
@@ -91,18 +91,18 @@ section{
   /*margin-left: 10px;*/
 }
 
-.left{
+.scoped-style .left{
   margin-right: 2%;
   display: flex;
   flex-direction: column;
 }
 
-.right{
+.scoped-style .right{
   padding: 15px;
   box-sizing: border-box;
 }
 
-.circle {
+.scoped-style .circle {
   width: 50px;
   height: 50px;
   line-height: 50px;
@@ -117,6 +117,6 @@ section{
   border: 1px solid #564239;
 }
 
-.highlighted {
+.scoped-style .highlighted {
   background-color: #f3d8c7; /* 클릭 시 색칠된 색상 */
 }
