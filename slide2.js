@@ -36,6 +36,10 @@ $(document).ready(function() {
             $(this).attr('src', iframeSrc);
           }
         });
+
+        content.find('iframe').on('load', function(){
+          console.log('iframe loaded successfully');
+        });
       },
       error: function() {
         rightSection.html('<p>컨텐츠를 로드하는 중 오류가 발생했습니다.</p>');
@@ -71,6 +75,12 @@ $(document).ready(function() {
           if (iframeSrc) {
             $(this).attr('src', iframeSrc);
           }
+        });
+
+        content.fine('script').each(function(){
+          const script = document.createElement('script');
+          script.text = $(this).text();
+          document.head.appendChild(script).parentNode.removeChild(script);
         });
       },
       error: function() {
