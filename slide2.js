@@ -13,6 +13,20 @@ $(document).ready(function() {
     showSlide(currentSlide + 1);
   }, 3000);
 
+  function adjustIframeHeight(iframe) {
+    if (iframe) {
+      $(iframe).on('load', function () {
+        const contentHeight = $(iframe).contents().find('body').prop('scrollHeight') + 'px';
+        $(iframe).css('height', contentHeight);
+
+        const fullSectionContainer = $('section.iframe-container');
+        if (fullSectionContainer.length) {
+          fullSectionContainer.css('height', contentHeight);
+        }
+      });
+    }
+  }
+
   window.loadContent = function(src) {
     const slides = $('.slides');
     const leftSection = $('.left');
@@ -48,7 +62,7 @@ $(document).ready(function() {
         $('<link>')
           .appendTo(content)
           .attr({ type: 'text/css', rel: 'stylesheet' })
-          .attr('href', '/ajax/knitting/style_sub.css');
+          .attr('href', 'knitting/style_sub.css');
       },
       error: function() {
         rightSection.html('<p>컨텐츠를 로드하는 중 오류가 발생했습니다.</p>');
@@ -57,6 +71,53 @@ $(document).ready(function() {
 
     leftSection.show();
     rightSection.show();
+  };
+
+  window.showFullSectionAjax = function(url) {
+    const leftSection = $('.left');
+    const rightSection = $('.right');
+    const slides = $('.slides');
+    const container = $('.container');
+    const fullSectionContainer = $('section.iframe-container');
+
+    if (leftSection.length) leftSection.hide();
+    if (rightSection.length) rightSection.hide();
+    if (slides.length) slides.hide();
+    if (container.length) container.hide();
+
+    if (fullSectionContainer.length) {
+      $.ajax({
+        url: url,
+        method: 'GET',
+        success: function(data) {
+          fullSectionContainer.html(data).show().css('height', '100vh');
+          
+          // CSS 파일 경로를 다시 확인하고 동적으로 추가
+          const linkTag = $('<link>', {
+            rel: 'stylesheet',
+            type: 'text/css',
+            href: 'knitting/style_sub.css'
+          });
+
+          linkTag.on('load', function() {
+            console.log('CSS 파일 로드 성공');
+          }).on('error', function() {
+            console.error('CSS 파일 로드 실패');
+          });
+
+          $('head').append(linkTag);
+          
+          // 높이 조정
+          adjustIframeHeight(fullSectionContainer);
+        },
+        error: function(xhr, status, error) {
+          console.error('Error loading content:', status, error);
+        }
+      });
+    }
+
+    $('html').css('overflow', 'hidden');
+    $('body').css('overflow', 'auto');
   };
 
   window.loadFullSection = function(src) {
@@ -97,7 +158,7 @@ $(document).ready(function() {
         $('<link>')
           .appendTo(content)
           .attr({ type: 'text/css', rel: 'stylesheet' })
-          .attr('href', '/ajax/knitting/style_sub.css');
+          .attr('href', 'knitting/style_sub.css');
       },
       error: function() {
         contentSection.html('<p>컨텐츠를 로드하는 중 오류가 발생했습니다.</p>');
@@ -119,4 +180,5 @@ $(document).ready(function() {
     $('html, body').css('overflow', 'auto');
   };
 });
+
 
