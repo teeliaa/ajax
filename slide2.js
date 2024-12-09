@@ -81,13 +81,6 @@ $(document).ready(function () {
           }
         });
 
-        // 동적으로 로드된 스크립트 실행
-        content.find('script').each(function () {
-          const script = document.createElement('script');
-          script.text = $(this).text();
-          document.head.appendChild(script).parentNode.removeChild(script);
-        });
-
         // style_sub.css 추가
         $('<link>')
           .appendTo('head')
@@ -129,13 +122,6 @@ $(document).ready(function () {
           if (videoId && containerId) {
             loadYouTubeVideo(containerId, videoId);
           }
-        });
-
-        // 동적으로 로드된 스크립트 실행
-        content.find('script').each(function () {
-          const script = document.createElement('script');
-          script.text = $(this).text();
-          document.head.appendChild(script).parentNode.removeChild(script);
         });
 
         // style_sub.css 추가
