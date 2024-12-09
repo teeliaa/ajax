@@ -59,7 +59,7 @@ $(document).ready(function () {
   window.loadContent = function (src) {
     const slides = $('.slides');
     const leftSection = $('.left');
-    const rightSection = $('#content');
+    const rightSection = $('.right');
 
     // 슬라이드 숨기기
     slides.hide();
