@@ -16,8 +16,8 @@ $(document).ready(function () {
   // YouTube API를 통해 동영상 로드
   function loadYouTubeVideo(videoId, containerId) {
     new YT.Player(containerId, {
-      height: '390',
-      width: '640',
+      height: '450',
+      width: '800',
       videoId: videoId,
       events: {
         onReady: (event) => {
