@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
   let currentSlide = 0;
 
   function showSlide(index) {
@@ -13,21 +13,50 @@ $(document).ready(function() {
     showSlide(currentSlide + 1);
   }, 3000);
 
-  function adjustIframeHeight(iframe) {
-    if (iframe) {
-      $(iframe).on('load', function () {
-        const contentHeight = $(iframe).contents().find('body').prop('scrollHeight') + 'px';
-        $(iframe).css('height', contentHeight);
+  // YouTube API를 통해 동영상 로드
+  function loadYouTubeVideo(containerId, videoId) {
+    if (!YT || !YT.Player) {
+      console.error('YouTube API가 로드되지 않았습니다.');
+      return;
+    }
 
-        const fullSectionContainer = $('section.iframe-container');
-        if (fullSectionContainer.length) {
-          fullSectionContainer.css('height', contentHeight);
+    new YT.Player(containerId, {
+      height: '450',
+      width: '800',
+      videoId: videoId,
+      events: {
+        onReady: (event) => {
+          console.log(`YouTube Video ${videoId} Loaded Successfully`);
+        },
+        onError: (event) => {
+          console.error(`YouTube API Error for video ${videoId}:`, event.data);
         }
-      });
+      }
+    });
+  }
+
+  function initializeYouTubeAPI() {
+    if (!window.onYouTubeIframeAPIReady) {
+      window.onYouTubeIframeAPIReady = function () {
+        console.log('YouTube API 준비 완료');
+      };
     }
   }
 
-  window.loadContent = function(src) {
+  // YouTube API를 로드
+  function loadYouTubeAPI() {
+    if (!document.getElementById('youtube-api')) {
+      const scriptTag = document.createElement('script');
+      scriptTag.src = 'https://www.youtube.com/iframe_api';
+      scriptTag.id = 'youtube-api';
+      document.head.appendChild(scriptTag);
+    }
+    initializeYouTubeAPI();
+  }
+
+  loadYouTubeAPI();
+
+  window.loadContent = function (src) {
     const slides = $('.slides');
     const leftSection = $('.left');
     const rightSection = $('#content');
@@ -39,32 +68,33 @@ $(document).ready(function() {
     $.ajax({
       url: src,
       dataType: 'html',
-      success: function(data) {
+      success: function (data) {
         const content = $(`<div class="scoped-style">${data}</div>`);
         rightSection.html(content);
 
-        // iframe의 data-src를 src로 변경하여 YouTube 동영상 로드
-        content.find('iframe').each(function() {
-          const iframeSrc = $(this).attr('data-src');
-          if (iframeSrc) {
-            $(this).attr('src', iframeSrc);
+        // YouTube API로 동영상 로드
+        content.find('[data-video-id]').each(function () {
+          const videoId = $(this).data('video-id');
+          const containerId = $(this).attr('id');
+          if (videoId && containerId) {
+            loadYouTubeVideo(containerId, videoId);
           }
         });
 
-        // 로드된 스크립트 수동 실행
-        content.find('script').each(function() {
+        // 동적으로 로드된 스크립트 실행
+        content.find('script').each(function () {
           const script = document.createElement('script');
           script.text = $(this).text();
           document.head.appendChild(script).parentNode.removeChild(script);
         });
 
-        // 서브 콘텐츠에 style_sub.css를 추가
+        // style_sub.css 추가
         $('<link>')
-          .appendTo(content)
+          .appendTo('head')
           .attr({ type: 'text/css', rel: 'stylesheet' })
           .attr('href', 'knitting/style_sub.css');
       },
-      error: function() {
+      error: function () {
         rightSection.html('<p>컨텐츠를 로드하는 중 오류가 발생했습니다.</p>');
       }
     });
@@ -73,54 +103,7 @@ $(document).ready(function() {
     rightSection.show();
   };
 
-  window.showFullSectionAjax = function(url) {
-    const leftSection = $('.left');
-    const rightSection = $('.right');
-    const slides = $('.slides');
-    const container = $('.container');
-    const fullSectionContainer = $('section.iframe-container');
-
-    if (leftSection.length) leftSection.hide();
-    if (rightSection.length) rightSection.hide();
-    if (slides.length) slides.hide();
-    if (container.length) container.hide();
-
-    if (fullSectionContainer.length) {
-      $.ajax({
-        url: url,
-        method: 'GET',
-        success: function(data) {
-          fullSectionContainer.html(data).show().css('height', '100vh');
-          
-          // CSS 파일 경로를 다시 확인하고 동적으로 추가
-          const linkTag = $('<link>', {
-            rel: 'stylesheet',
-            type: 'text/css',
-            href: 'knitting/style_sub.css'
-          });
-
-          linkTag.on('load', function() {
-            console.log('CSS 파일 로드 성공');
-          }).on('error', function() {
-            console.error('CSS 파일 로드 실패');
-          });
-
-          $('head').append(linkTag);
-          
-          // 높이 조정
-          adjustIframeHeight(fullSectionContainer);
-        },
-        error: function(xhr, status, error) {
-          console.error('Error loading content:', status, error);
-        }
-      });
-    }
-
-    $('html').css('overflow', 'hidden');
-    $('body').css('overflow', 'auto');
-  };
-
-  window.loadFullSection = function(src) {
+  window.loadFullSection = function (src) {
     const leftSection = $('.left');
     const rightSection = $('.right');
     const container = $('.container');
@@ -135,32 +118,33 @@ $(document).ready(function() {
     $.ajax({
       url: src,
       dataType: 'html',
-      success: function(data) {
+      success: function (data) {
         const content = $(`<div class="scoped-style">${data}</div>`);
         contentSection.html(content).show();
 
-        // iframe의 data-src를 src로 변경하여 YouTube 동영상 로드
-        content.find('iframe').each(function() {
-          const iframeSrc = $(this).attr('data-src');
-          if (iframeSrc) {
-            $(this).attr('src', iframeSrc);
+        // YouTube API로 동영상 로드
+        content.find('[data-video-id]').each(function () {
+          const videoId = $(this).data('video-id');
+          const containerId = $(this).attr('id');
+          if (videoId && containerId) {
+            loadYouTubeVideo(containerId, videoId);
           }
         });
 
-        // 로드된 스크립트 수동 실행
-        content.find('script').each(function() {
+        // 동적으로 로드된 스크립트 실행
+        content.find('script').each(function () {
           const script = document.createElement('script');
           script.text = $(this).text();
           document.head.appendChild(script).parentNode.removeChild(script);
         });
 
-        // 서브 콘텐츠에 style_sub.css를 추가
+        // style_sub.css 추가
         $('<link>')
-          .appendTo(content)
+          .appendTo('head')
           .attr({ type: 'text/css', rel: 'stylesheet' })
           .attr('href', 'knitting/style_sub.css');
       },
-      error: function() {
+      error: function () {
         contentSection.html('<p>컨텐츠를 로드하는 중 오류가 발생했습니다.</p>');
       }
     });
@@ -168,7 +152,7 @@ $(document).ready(function() {
     $('html, body').css('overflow', 'hidden');
   };
 
-  window.showHome = function() {
+  window.showHome = function () {
     const leftSection = $('.left');
     const rightSection = $('.right');
     const slides = $('.slides');
