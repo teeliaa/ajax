@@ -30,8 +30,8 @@ $(document).ready(function () {
         },
         onError: (event) => {
           console.error(`YouTube API Error for video ${videoId}:`, event.data);
-        }
-      }
+        },
+      },
     });
   }
 
@@ -56,10 +56,11 @@ $(document).ready(function () {
 
   loadYouTubeAPI();
 
+  // 콘텐츠를 iframe에 로드
   window.loadContent = function (src) {
     const slides = $('.slides');
     const leftSection = $('.left');
-    const rightSection = $('.right');
+    const rightFrame = $('#right-frame');
 
     // 슬라이드 숨기기
     slides.hide();
@@ -69,31 +70,26 @@ $(document).ready(function () {
       url: src,
       dataType: 'html',
       success: function (data) {
-        const content = $(`<div class="scoped-style">${data}</div>`);
-        rightSection.html(content);
+        // iframe에 srcdoc 속성을 통해 데이터 로드
+        rightFrame.attr('srcdoc', data).show();
 
-        // YouTube API로 동영상 로드
-        content.find('[data-video-id]').each(function () {
+        // 동적으로 로드된 YouTube 동영상 처리
+        const tempDiv = $('<div>').html(data); // 데이터를 임시로 jQuery 객체로 변환
+        tempDiv.find('[data-video-id]').each(function () {
           const videoId = $(this).data('video-id');
           const containerId = $(this).attr('id');
           if (videoId && containerId) {
             loadYouTubeVideo(containerId, videoId);
           }
         });
-
-        // style_sub.css 추가
-        $('<link>')
-          .appendTo('head')
-          .attr({ type: 'text/css', rel: 'stylesheet' })
-          .attr('href', 'knitting/style_sub.css');
       },
       error: function () {
-        rightSection.html('<p>컨텐츠를 로드하는 중 오류가 발생했습니다.</p>');
-      }
+        rightFrame.attr('srcdoc', '<p>컨텐츠를 로드하는 중 오류가 발생했습니다.</p>').show();
+      },
     });
 
     leftSection.show();
-    rightSection.show();
+    rightFrame.show();
   };
 
   window.loadFullSection = function (src) {
@@ -112,18 +108,11 @@ $(document).ready(function () {
       url: src,
       dataType: 'html',
       success: function (data) {
-        const content = $(`<div class="scoped-style">${data}</div>`);
-        contentSection.html(content).show();
-
-        // style_sub.css 추가
-        $('<link>')
-          .appendTo('head')
-          .attr({ type: 'text/css', rel: 'stylesheet' })
-          .attr('href', 'knitting/style_sub.css');
+        contentSection.html(data).show();
       },
       error: function () {
         contentSection.html('<p>컨텐츠를 로드하는 중 오류가 발생했습니다.</p>');
-      }
+      },
     });
 
     $('html, body').css('overflow', 'hidden');
@@ -133,12 +122,15 @@ $(document).ready(function () {
     const leftSection = $('.left');
     const rightSection = $('.right');
     const slides = $('.slides');
+    const rightFrame = $('#right-frame');
 
     leftSection.show();
     rightSection.show();
     slides.show();
+    rightFrame.hide();
 
     $('html, body').css('overflow', 'auto');
   };
 });
+
 
