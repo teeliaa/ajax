@@ -115,15 +115,6 @@ $(document).ready(function () {
         const content = $(`<div class="scoped-style">${data}</div>`);
         contentSection.html(content).show();
 
-        // YouTube API로 동영상 로드
-        content.find('[data-video-id]').each(function () {
-          const videoId = $(this).data('video-id');
-          const containerId = $(this).attr('id');
-          if (videoId && containerId) {
-            loadYouTubeVideo(containerId, videoId);
-          }
-        });
-
         // style_sub.css 추가
         $('<link>')
           .appendTo('head')
