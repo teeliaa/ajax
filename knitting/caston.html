@@ -14,24 +14,5 @@
     <p>영문 도안 표시: CO<br>
     동영상 강의 ▼</p>
     <div id="youtube-player" data-video-id="fl73UBCBUpQ?"></div>
-    <script>
-      function onYouTubeIframeAPIReady(){
-        new YT.Player(playerContainer, {
-            height: '450',
-            width: '800',
-            videoId: videoId,
-            events: {
-              onReady: (event) => {
-                console.log('YouTube Video Loaded:', videoId);
-              },
-              onError: (event) => {
-                console.error('YouTube API Error:', event.data);
-              }
-            }
-          });
-      } else{
-        console.error('No video ID found for YouTube player.')
-      }
-    </script>
   </body>
 </html>
