@@ -23,6 +23,7 @@
 .scoped-style iframe{
   margin-top: 5px;
   margin-bottom: 5px;
+  width: 100%;
 }
 
 .scoped-style p{
