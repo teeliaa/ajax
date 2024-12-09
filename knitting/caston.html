@@ -7,11 +7,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="knitting/style_sub.css">
+    <script src="https://www.youtube.com/iframe_api"></script>
   </head>
   <body>
     <h3>코 잡기(cast-on)</h3>
     <p>영문 도안 표시: CO<br>
     동영상 강의 ▼</p>
-    <iframe width="800" height="450" src="https://www.youtube.com/embed/fl73UBCBUpQ?si=P-KptcacdDkJMVwf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <div id="youtube-player" data-video-id="fl73UBCBUpQ?"></div>
+    <script>
+      function onYouTubeIframeAPIReady(){
+        new YT.Player(playerContainer, {
+            height: '450',
+            width: '800',
+            videoId: videoId,
+            events: {
+              onReady: (event) => {
+                console.log('YouTube Video Loaded:', videoId);
+              },
+              onError: (event) => {
+                console.error('YouTube API Error:', event.data);
+              }
+            }
+          });
+      } else{
+        console.error('No video ID found for YouTube player.')
+      }
+    </script>
   </body>
 </html>
